@@ -1,0 +1,45 @@
+service: "service:AIService"
+
+labels:
+  owner: RZBKConsulting
+  project: AIService
+
+include:
+  - 'service.py'
+  - 'requirements.txt'
+  - 'services/'
+  - 'cert/'
+  - 'utils/'
+
+python:
+  requirements_txt: requirements.txt
+
+envs:
+  - name: "SVC_LLM_MODEL_NAME"
+    value: "turboderp/Phi-3-mini-128k-instruct-exl2"
+  - name: "SVC_LLM_MODEL_DIR"
+    value: "models"
+  - name: "SVC_LLM_DEVICE"
+    value: "0"
+  - name: "SVC_LLM_DEBUG"
+    value: "False"
+  - name: "SVC_LLM_SEQ_LEN"
+    value: "2048"
+
+  # Configuration for TTS service
+  - name: "SVC_TTS_MODEL_NAME"
+    value: "tts_models/en/ljspeech/glow-tts"
+  - name: "SVC_TTS_DEVICE"
+    value: "1"
+  - name: "COQUI_TOS_AGREED"
+    value: "1"
+
+  # Configuration for STT service
+  - name: "SVC_STT_MODEL_NAME"
+    value: "large-v3"
+  - name: "SVC_STT_DEVICE"
+    value: "1"
+
+  # CUDA Settings
+  - name: "CUDA_VISIBLE_DEVICES"
+    value: "0,1"
